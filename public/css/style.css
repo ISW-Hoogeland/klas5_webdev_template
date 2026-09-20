@@ -1,0 +1,98 @@
+:root {
+    font-family: system-ui, sans-serif;
+    color: #1f2937;
+    background: #f6f7fb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    line-height: 1.5;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem max(1rem, calc((100% - 70rem) / 2));
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+a { color: #3154a5; }
+.logo { font-weight: 700; text-decoration: none; }
+
+main {
+    width: min(70rem, calc(100% - 2rem));
+    margin: 2rem auto;
+}
+
+button, .knop {
+    display: inline-block;
+    padding: .65rem 1rem;
+    border: 0;
+    border-radius: .45rem;
+    background: #3154a5;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input, select {
+    width: 100%;
+    padding: .65rem;
+    border: 1px solid #bbb;
+    border-radius: .45rem;
+    font: inherit;
+}
+
+.zoekbalk, .formulier {
+    max-width: 32rem;
+    margin-bottom: 2rem;
+}
+
+.zoekbalk div {
+    display: flex;
+    gap: .5rem;
+    margin-top: .35rem;
+}
+
+.formulier {
+    display: grid;
+    gap: .5rem;
+}
+
+.formulier button { margin-top: .5rem; }
+
+.producten, .categorieen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.product, .detail {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: .65rem;
+    padding: 1rem;
+}
+
+.product {
+    flex: 0 0 15rem;
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    justify-content: space-between;
+}
+
+.product h2, .detail h1 { margin-top: 0; }
+.melding { padding: .75rem; background: white; border-left: .25rem solid #3154a5; }

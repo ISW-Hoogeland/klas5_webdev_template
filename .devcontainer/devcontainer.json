@@ -1,0 +1,20 @@
+{
+  "name": "Webdevelopment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Webdevelopment",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y sqlite3 && npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // "qwtel.sqlite-viewer",
+        "alexcvzz.vscode-sqlite"
+      ]
+    }
+  }
+}

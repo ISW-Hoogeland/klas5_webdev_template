@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Producten</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <a class="logo" href="index.html">Webshop</a>
+    <nav>
+        <a href="producten.html">Producten</a>
+        <a href="toevoegen.html">Toevoegen</a>
+        <a href="categorieen.html">Categorieën</a>
+    </nav>
+</header>
+<main>
+    <h1>Producten</h1>
+
+    <form id="zoekformulier" class="zoekbalk">
+        <label for="zoekterm">Zoek op naam</label>
+        <div>
+            <input id="zoekterm" type="search" placeholder="Bijvoorbeeld Mario">
+            <button type="submit">Zoeken</button>
+        </div>
+    </form>
+
+    <p id="melding" class="melding" hidden></p>
+    <section id="producten" class="producten"></section>
+</main>
+<script src="js/producten.js"></script>
+</body>
+</html>
