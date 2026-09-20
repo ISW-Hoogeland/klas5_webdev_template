@@ -1,9 +1,10 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
+const { DatabaseSync } = require("node:sqlite");
 
 const app = express();
 const port = 3000;
-const db = new sqlite3.Database("./data/webshop.db");
+
+const db = new DatabaseSync("./data/webshop.db");
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -12,47 +13,51 @@ app.use(express.static("public"));
 app.get("/api/producten", (req, res) => {
     const zoekterm = req.query.zoekterm;
 
-    const sql = zoekterm
-        ? `SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
-           FROM producten
-           WHERE naam LIKE ?
-           ORDER BY naam;`
-        : `SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
-           FROM producten
-           ORDER BY naam;`;
+    try {
+        const sql = zoekterm
+            ? `SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
+               FROM producten
+               WHERE naam LIKE ?
+               ORDER BY naam;`
+            : `SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
+               FROM producten
+               ORDER BY naam;`;
 
-    const waarden = zoekterm ? [`%${zoekterm}%`] : [];
+        const statement = db.prepare(sql);
 
-    db.all(sql, waarden, (fout, producten) => {
-        if (fout) {
-            return res.status(500).json({ bericht: "Databasefout" });
-        }
+        const producten = zoekterm
+            ? statement.all(`%${zoekterm}%`)
+            : statement.all();
 
         res.json(producten);
-    });
+    } catch (fout) {
+        console.error(fout);
+        res.status(500).json({ bericht: "Databasefout" });
+    }
 });
 
 // Eén product tonen.
 app.get("/api/producten/:id", (req, res) => {
     const id = req.params.id;
 
-    const sql = `
-        SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
-        FROM producten
-        WHERE id = ?;
-    `;
+    try {
+        const sql = `
+            SELECT id, naam, prijs, beschrijving, beschikbaar, categorie_id
+            FROM producten
+            WHERE id = ?;
+        `;
 
-    db.get(sql, [id], (fout, product) => {
-        if (fout) {
-            return res.status(500).json({ bericht: "Databasefout" });
-        }
+        const product = db.prepare(sql).get(id);
 
         if (!product) {
             return res.status(404).json({ bericht: "Product niet gevonden" });
         }
 
         res.json(product);
-    });
+    } catch (fout) {
+        console.error(fout);
+        res.status(500).json({ bericht: "Databasefout" });
+    }
 });
 
 // LES 5: schrijf hier zelf de POST-route voor /api/producten.

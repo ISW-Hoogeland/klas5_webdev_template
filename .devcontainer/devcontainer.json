@@ -8,12 +8,11 @@
       "onAutoForward": "openPreview"
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y sqlite3 && npm install",
-  "customizations": {
+"postCreateCommand": "sudo apt-get update && sudo apt-get install -y sqlite3 && npm ci",
+"customizations": {
     "vscode": {
       "extensions": [
-        // "qwtel.sqlite-viewer",
-        "alexcvzz.vscode-sqlite"
+        "mjstudio.db-viewer"
       ]
     }
   }
