@@ -13,7 +13,11 @@
     "vscode": {
       "extensions": [
         "mjstudio.db-viewer"
-      ]
+      ],
+      "settings": {
+        "chat.disableAIFeatures": true,
+        "workbench.secondarySideBar.defaultVisibility": "hidden"
+      }
     }
   }
 }
